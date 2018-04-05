@@ -35,15 +35,19 @@ function shuffle(array) {
 document.body.onload = startGame();
 
 function startGame() {
-	cards = shuffle(cards);
-
+openedCards=[];
+    // reset moves
+    countMoves = 0;
+    moves.innerHTML = 'Moves: 0';
     //reset timer
     second = 0;
     minute = 0;
     hour = 0;
-    var timer = document.querySelector(".timer");
-    timer.innerHTML = "0 mins 0 secs";
+    let timer = document.querySelector(".timer");
+    timer.innerHTML = "Time: 0 mins 0 secs";
     clearInterval(interval);
+
+	cards = shuffle(cards);
 
 	for (var i = 0; i < cards.length; i++){
         deck.innerHTML = "";
@@ -56,7 +60,6 @@ function startGame() {
 	  cards[i].addEventListener("click", flipCard);
 	  cards[i].addEventListener("click", openedCard);
 	};
-
 }
 
 function flipCard() {
@@ -93,16 +96,14 @@ function openedCard() {
 
 function moveCounter() {
 	countMoves++;
-
+	moves.innerHTML = 'Moves: '+countMoves;
+console.log(countMoves);
 	if(countMoves==1) {
-		moves.innerHTML = countMoves + ' Move';
 		//start game timer on first click on a card
 		startTimer();
-	} else {
-		moves.innerHTML = countMoves + ' Moves';
 	}
 
-	if(second==0 && minute==0 && hour==0){
+	if(countMoves>1&& second==0 && minute==0 && hour==0){
 		startTimer();
 	}
 
@@ -128,7 +129,7 @@ var timer = document.querySelector(".timer");
 var interval;
 function startTimer(){
     interval = setInterval(function(){
-        timer.innerHTML = minute+"mins "+second+"secs";
+        timer.innerHTML = "Time: "+minute+"mins "+second+"secs";
         second++;
         if(second == 60){
             minute++;
