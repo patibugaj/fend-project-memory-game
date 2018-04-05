@@ -133,10 +133,12 @@ console.log(countMoves);
 
 
 function endOfGame(result) {
-	console.log(result);
-	alert('jsdjflksjf');
+	console.log(document.getElementsByClassName('alert'));
 	if(result=='lose'){
-		modal.getElementsByClassName('alert').childNodes[0].innerHTML = 'Unfortunately you lose';
+		const heading = document.getElementById('alert').childNodes[1];
+		heading.innerHTML = 'End of Game';
+		const paragraph1 = document.querySelector('#alert-paragraph-1');
+		paragraph1.innerHTML = 'Time is over!';
         // show congratulations modal
         modal.classList.add("show");
         //closeicon on modal
@@ -190,7 +192,7 @@ function startTimer(){
             minute--;
             second=5;
         }
-        if(minute<0&&second==5){endOfGame("lose")};
+        if(minute<0&&second==4){endOfGame("lose")};
     },1000);
 }
 
