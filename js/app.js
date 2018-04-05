@@ -10,6 +10,15 @@ let openedCards = [];
 
 let countMoves = 0;
 let moves = document.querySelector(".moves");
+
+// declaring variable of matchedCards
+let matchedCard = document.getElementsByClassName("match");
+
+ // close icon in modal
+ let closeicon = document.querySelector(".close");
+
+ // declare modal
+ let modal = document.getElementById("alert-window")
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -41,10 +50,9 @@ openedCards=[];
     moves.innerHTML = 'Moves: 0';
     //reset timer
     second = 0;
-    minute = 0;
-    hour = 0;
+    minute = 1;
     let timer = document.querySelector(".timer");
-    timer.innerHTML = "Time: 0 mins 0 secs";
+    timer.innerHTML = "Time: 5 mins 0 secs";
     clearInterval(interval);
 
 	cards = shuffle(cards);
@@ -103,7 +111,7 @@ console.log(countMoves);
 		startTimer();
 	}
 
-	if(countMoves>1&& second==0 && minute==0 && hour==0){
+	if(countMoves>1&& second==0 && minute==5){
 		startTimer();
 	}
 
@@ -123,22 +131,66 @@ console.log(countMoves);
 	}
 }
 
+
+function endOfGame(result) {
+	console.log(result);
+	alert('jsdjflksjf');
+	if(result=='lose'){
+		modal.getElementsByClassName('alert').childNodes[0].innerHTML = 'Unfortunately you lose';
+        // show congratulations modal
+        modal.classList.add("show");
+        //closeicon on modal
+        closeModal();
+	}
+	if (matchedCard.length == 16){
+        clearInterval(interval);
+        finalTime = timer.innerHTML;
+
+        // show congratulations modal
+        modal.classList.add("show");
+
+        // declare star rating variable
+        var starRating = document.querySelector(".stars").innerHTML;
+
+        //showing move, rating, time on modal
+        document.getElementById("finalMove").innerHTML = moves;
+        document.getElementById("starRating").innerHTML = starRating;
+        document.getElementById("totalTime").innerHTML = finalTime;
+
+        //closeicon on modal
+        closeModal();
+    };
+
+}
+
+// @description close icon on modal
+function closeModal(){
+    closeicon.addEventListener("click", function(e){
+        modal.classList.remove("show");
+        startGame();
+    });
+}
+
+
+// @desciption for user to play Again
+function playAgain(){
+    modal.classList.remove("show");
+    startGame();
+}
+
 // @description game timer
-var second = 0, minute = 0; hour = 0;
+var second = 0, minute = 1;
 var timer = document.querySelector(".timer");
 var interval;
 function startTimer(){
     interval = setInterval(function(){
         timer.innerHTML = "Time: "+minute+"mins "+second+"secs";
-        second++;
-        if(second == 60){
-            minute++;
-            second=0;
+        second--;
+        if(second == -1){
+            minute--;
+            second=5;
         }
-        if(minute == 60){
-            hour++;
-            minute = 0;
-        }
+        if(minute<0&&second==5){endOfGame("lose")};
     },1000);
 }
 
