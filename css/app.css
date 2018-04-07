@@ -29,8 +29,14 @@ body {
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Abril Fatface', cursive;
+    letter-spacing: 3px;
     font-weight: 300;
+    margin-bottom: 0.4em;
+}
+
+.fa-star, .fa-star-o {
+    color: #ffd700;
 }
 
 /*
@@ -38,10 +44,12 @@ h1 {
  */
 
 .deck {
-    width: 500px;
-    min-height: 520px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    width: 380px;
+    min-height: 380px;
+    background: #FEAC5E;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -52,9 +60,9 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background: #2e3d49;
+    height: 80px;
+    width: 80px;
+    background: #472e5f;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
@@ -67,7 +75,7 @@ h1 {
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02b3e4;
+    background: #02b3e400;
     cursor: default;
     animation-name: flipInY;
     -webkit-backface-visibility: visible !important;
@@ -76,12 +84,12 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 28px;
 }
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #64dc62;
     font-size: 33px;
     animation-name: rubberBand;
     -webkit-backface-visibility: visible !important;
@@ -102,8 +110,8 @@ h1 {
  */
 
 .score-panel {
-    /*text-align: left;*/
-    width: 580px;
+    font-size: 14px;
+    width: 352px;
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
@@ -111,9 +119,22 @@ h1 {
 }
 
 .score-panel > div {
-    flex-basis: 25%;
     margin: auto;
     text-align: center;
+}
+
+.score-panel .lives {
+    flex-basis: 25%;
+}
+
+.score-panel .moves {
+    flex-basis: 20%;
+    text-align: right;
+}
+
+.score-panel .timer {
+    flex-basis: 38%;
+    text-align: right;
 }
 
 .score-panel .stars {
@@ -122,9 +143,7 @@ h1 {
     display: inline-block;
     margin: 0 5px 0 0;
 }
-.score-panel .lives {
-    /*display: inline-block;*/
-}
+
 .score-panel .lives p {
     display: inline-block;
 }
@@ -135,10 +154,10 @@ h1 {
 }
 
 .score-panel .restart {
+    flex-basis: 14%;
     float: right;
-    /*display: inline-block;*/
     cursor: pointer;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 /*
@@ -175,15 +194,21 @@ h1 {
 }
 
 .alert h2 {
-    margin-top: 0;
+    text-align: center;
     color: #333;
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: 'Abril Fatface', cursive;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.alert .close-button {
+    width: 100%;
 }
 
 .alert .close {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 0;
+    right: 15px;
     transition: all 200ms;
     font-size: 30px;
     font-weight: bold;

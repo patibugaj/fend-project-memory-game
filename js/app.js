@@ -146,12 +146,13 @@ function moveCounter() {
 function endOfGame(result) {
     clearInterval(interval);
 	if(result=='lose'){
-		const heading = document.getElementById('alert').childNodes[1];
+		const heading = document.getElementById('alert').childNodes[3];
 		heading.innerHTML = 'End of Game';
 		const paragraph1 = document.querySelector('#alert-paragraph-1');
-		paragraph1.innerHTML = 'Time is over!';
+		paragraph1.innerHTML = 'You lose! Time is over';
         // show congratulations modal
         modal.classList.add("show");
+        document.querySelector(".win").style.display = "none";
         //closeicon on modal
         closeModal();
 	}
@@ -170,17 +171,21 @@ function endOfGame(result) {
         // show congratulations modal
         modal.classList.add("show");
 
-        // declare star rating variable
-        var starRating = document.querySelector(".stars").innerHTML;
-
-        //showing move, rating, time on modal
+        //showing time on modal
         document.getElementById("finalMove").innerHTML = countMoves;
         document.getElementById("starRating").innerHTML = starRating;
         document.getElementById("totalTime").innerHTML = finalTime;
 
         //closeicon on modal
         closeModal();
-    };
+    }
+
+    // declare star rating variable
+    const starRating = document.querySelector(".stars").innerHTML;
+
+    //showing move, rating on modal
+    document.getElementById("finalMove").innerHTML = countMoves;
+    document.getElementById("starRating").innerHTML = starRating;
 
 }
 
@@ -209,9 +214,14 @@ function startTimer(){
         second--;
         if(second == -1){
             minute--;
-            second=59;
+            second=10;
         }
-        if(minute<0&&second==59){
+        if(minute==0&&second<10){
+        	timer.style.animationName= "flash";
+        	timer.style.animationDuration= ".75s";
+        	timer.style.color= "red";
+        }
+        if(minute<0&&second==10){
         	endOfGame("lose");
         }
     },1000);

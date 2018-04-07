@@ -6,9 +6,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" media="screen and (min-width: 550px)" href="css/responsive.css">
 </head>
 <body>
 
@@ -94,14 +96,16 @@
 
     <div id="alert-window" class="overlay">
         <div id="alert" class="alert">
+            <div class="close-button">
+                <a class="close" href="#">×</a>
+            </div>
             <h2></h2>
-            <a class="close" href=# >×</a>
             <div id="alert-paragraph-1" class="content-1">
             </div>
             <div id="alert-paragraph-2" class="content-2">
                 <p>You made <span id="finalMove"></span> moves </p>
-                <p>in <span id="totalTime"></span> </p>
-                <p>Rating:  <span id="starRating"></span></p>
+                <p class="win">in <span id="totalTime"></span> </p>
+                <p>Lives left:  <span id="starRating"></span></p>
             </div>
             <button id="play-again"onclick="playAgain()">
                 Play again 😄</a>
