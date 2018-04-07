@@ -6,6 +6,10 @@ let card = document.getElementsByClassName("card");
 let cards = [...card];
 console.log(cards);
 
+
+// declare variables for star icons
+const stars = document.querySelectorAll(".star");
+
 let openedCards = [];
 
 let countMoves = 0;
@@ -13,6 +17,7 @@ let moves = document.querySelector(".moves");
 
 // declaring variable of matchedCards
 let matchedCard = document.getElementsByClassName("match");
+let matchedCards = 0;
 
  // close icon in modal
  let closeicon = document.querySelector(".close");
@@ -48,11 +53,18 @@ openedCards=[];
     // reset moves
     countMoves = 0;
     moves.innerHTML = 'Moves: 0';
+
+    // reset star rating
+    for (var i= 0; i < stars.length; i++){
+        const star = stars[i].childNodes[0];
+        star.className = 'fa fa-star';
+    }
+
     //reset timer
     second = 0;
-    minute = 1;
+    minute = 3;
     let timer = document.querySelector(".timer");
-    timer.innerHTML = "Time: 5 mins 0 secs";
+    timer.innerHTML = "Time: 3 mins 0 secs";
     clearInterval(interval);
 
 	cards = shuffle(cards);
@@ -62,11 +74,11 @@ openedCards=[];
         [].forEach.call(cards, function(item) {
             deck.appendChild(item);
         });
-	  //remove action classes
-	  cards[i].classList.remove("open", "show", "match");
-	  //add event 'click' to flip a card
-	  cards[i].addEventListener("click", flipCard);
-	  cards[i].addEventListener("click", openedCard);
+		//remove action classes
+		cards[i].classList.remove("open", "show", "match");
+		//add event 'click' to flip a card
+		cards[i].addEventListener("click", flipCard);
+		cards[i].addEventListener("click", openedCard);
 	};
 }
 
@@ -94,6 +106,8 @@ function openedCard() {
 		if(openedCards[0].className == openedCards[1].className) {
 			openedCards.forEach(matched);
 			openedCards = [];
+			matchedCards += 2;
+			if(matchedCards==16){endOfGame('win');}
 		} else {
 			openedCards.forEach(unmatched);
 			openedCards = [];
@@ -105,13 +119,13 @@ function openedCard() {
 function moveCounter() {
 	countMoves++;
 	moves.innerHTML = 'Moves: '+countMoves;
-console.log(countMoves);
+	console.log(countMoves);
 	if(countMoves==1) {
 		//start game timer on first click on a card
 		startTimer();
 	}
 
-	if(countMoves>1&& second==0 && minute==5){
+	if(countMoves>1&& second==0 && minute==3){
 		startTimer();
 	}
 
@@ -125,15 +139,12 @@ console.log(countMoves);
 	}else if(countMoves>=21){
 		const star1 = document.getElementById('star1').childNodes[0];
 		star1.className= 'fa fa-star-o';
-		// setTimeout(function(){
-		// 	openedCard.classList.remove("open", "show");
-		// }, 1000);
 	}
 }
 
-
+// 'end of game' popup window
 function endOfGame(result) {
-	console.log(document.getElementsByClassName('alert'));
+    clearInterval(interval);
 	if(result=='lose'){
 		const heading = document.getElementById('alert').childNodes[1];
 		heading.innerHTML = 'End of Game';
@@ -144,9 +155,17 @@ function endOfGame(result) {
         //closeicon on modal
         closeModal();
 	}
-	if (matchedCard.length == 16){
+
+	if (result=='win'){
+		const startTime= 3*60;
+		const timeLeft = minute*60 + second;
+		const finalTimeTotal = startTime-timeLeft;
+		const finalTimeMinutes = Math.floor(finalTimeTotal/60);
+		const finalTimeSeconds = finalTimeTotal - finalTimeMinutes * 60;
         clearInterval(interval);
-        finalTime = timer.innerHTML;
+        timer.innerHTML = 'time: '+finalTimeMinutes+'mins '+finalTimeSeconds+'secs';
+        const finalTime =timer.innerHTML;
+
 
         // show congratulations modal
         modal.classList.add("show");
@@ -155,7 +174,7 @@ function endOfGame(result) {
         var starRating = document.querySelector(".stars").innerHTML;
 
         //showing move, rating, time on modal
-        document.getElementById("finalMove").innerHTML = moves;
+        document.getElementById("finalMove").innerHTML = countMoves;
         document.getElementById("starRating").innerHTML = starRating;
         document.getElementById("totalTime").innerHTML = finalTime;
 
@@ -165,7 +184,7 @@ function endOfGame(result) {
 
 }
 
-// @description close icon on modal
+// close button in a modal popup
 function closeModal(){
     closeicon.addEventListener("click", function(e){
         modal.classList.remove("show");
@@ -174,14 +193,14 @@ function closeModal(){
 }
 
 
-// @desciption for user to play Again
+// 'play again' button in a modal popup
 function playAgain(){
     modal.classList.remove("show");
     startGame();
 }
 
-// @description game timer
-var second = 0, minute = 1;
+// countdown timer
+var second = 0, minute = 3;
 var timer = document.querySelector(".timer");
 var interval;
 function startTimer(){
@@ -190,9 +209,11 @@ function startTimer(){
         second--;
         if(second == -1){
             minute--;
-            second=5;
+            second=59;
         }
-        if(minute<0&&second==4){endOfGame("lose")};
+        if(minute<0&&second==59){
+        	endOfGame("lose");
+        }
     },1000);
 }
 
