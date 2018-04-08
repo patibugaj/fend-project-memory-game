@@ -56,7 +56,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    margin: 0;
 }
 
 .deck .card {
@@ -87,6 +87,11 @@ h1 {
     font-size: 28px;
 }
 
+.deck .card.disable {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
 .deck .card.match {
     cursor: default;
     background: #64dc62;
@@ -112,7 +117,6 @@ h1 {
 .score-panel {
     font-size: 14px;
     width: 352px;
-    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -161,10 +165,8 @@ h1 {
 }
 
 /*
- * Styles for congratulations modal
+ * Styles for popup window
  */
-
-
 .overlay {
     position: fixed;
     top: 0;
@@ -187,10 +189,9 @@ h1 {
     padding: 20px;
     background: #ffffff;
     border-radius: 5px;
-    width: 85%;
+    width: 80%;
     position: relative;
-    transition: all 5s ease-in-out;
-    font-family: 'Gloria Hallelujah', cursive;
+    text-align: center;
 }
 
 .alert h2 {
@@ -236,14 +237,16 @@ h1 {
     display: inline-block;
 }
 
+/*button to play again*/
 #play-again {
-    background-color: #141214;
-    padding: 0.7rem 1rem;
-    font-size: 1.1rem;
-    display: block;
-    margin: 0 auto;
-    width: 50%;
-    font-family: 'Gloria Hallelujah', cursive;
-    color: #ffffff;
-    border-radius: 5px;
+    box-sizing: content-box;
+    background-color: #1abc9c;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: 0;
+    cursor: pointer;
 }

@@ -33,11 +33,11 @@
                 <p></p>
             </div>
 
-            <div class="timer">
+            <div id="timer" class="timer">
                 <p></p>
             </div>
-
-            <div class="restart" onclick=startGame()>
+            <!-- restart game button (keyboard shortcut: alt + r) -->
+            <div class="restart" onclick=startGame() accesskey="r">
         		<i class="fa fa-repeat"></i>
         	</div>
         </section>
@@ -103,12 +103,12 @@
             <div id="alert-paragraph-1" class="content-1">
             </div>
             <div id="alert-paragraph-2" class="content-2">
-                <p>You made <span id="finalMove"></span> moves </p>
+                <p>You made <span id="finalMove"></span></p>
                 <p class="win">in <span id="totalTime"></span> </p>
                 <p>Lives left:  <span id="starRating"></span></p>
             </div>
-            <button id="play-again"onclick="playAgain()">
-                Play again 😄</a>
+            <button id="play-again" onclick="playAgain()">
+                Play again
             </button>
         </div>
     </div>
