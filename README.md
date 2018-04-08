@@ -15,7 +15,7 @@ This game was built as a Udacity Course project. The Memory Game Project is all 
 
 ## How to play:
 
-Load this link in your browser https://patibugaj.github.io/Memory-Game-fend/
+Load this link in your browser https://patibugaj.github.io/fend-project-memory-game/
 
 ### Instructions:
 
