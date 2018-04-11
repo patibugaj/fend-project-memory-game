@@ -199,7 +199,7 @@ function endOfGame(result) {
 
     }
 
-    if (result=='win'||result=='noLives'){
+    if (result=='win' || result=='noLives'){
         document.getElementById("finalMove").innerHTML = countMoves;
         document.getElementById("starRating").innerHTML = starRating;
         document.getElementById("totalTime").innerHTML = calculateTime();
@@ -214,13 +214,12 @@ function endOfGame(result) {
     //add keypress action to initialize playAgain() after enter
 	keyPressPlay = function (event) {
 	    event.preventDefault();
-	    console.log('keys');
-	    if (event.keyCode === 13||event.keyCode === 27) {
-	    	console.log('enter');
+	    if (event.keyCode === 13) {
 	        document.getElementById("play-again").click();
 	    }
 	}
 	document.addEventListener("keypress", keyPressPlay);
+
     //showing move, rating
     if(countMoves==1) {
     	document.getElementById("finalMove").innerHTML = countMoves+' move';
