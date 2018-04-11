@@ -29,6 +29,8 @@ let matchedCards = 0;
  //variable for popup modal
  let modal = document.getElementById("alert-window")
 
+ let keyPressPlay;
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -59,6 +61,10 @@ document.body.onload = startGame();
 function startGame() {
 	//reset open cards array
 	openedCards=[];
+
+	//reset matched cards
+	matchedCards = 0;
+	console.log('Matched cards: '+matchedCards+';');
 
     //reset moves
     countMoves = 0;
@@ -205,6 +211,16 @@ function endOfGame(result) {
     //close icon
     closeButton();
 
+    //add keypress action to initialize playAgain() after enter
+	keyPressPlay = function (event) {
+	    event.preventDefault();
+	    console.log('keys');
+	    if (event.keyCode === 13||event.keyCode === 27) {
+	    	console.log('enter');
+	        document.getElementById("play-again").click();
+	    }
+	}
+	document.addEventListener("keypress", keyPressPlay);
     //showing move, rating
     if(countMoves==1) {
     	document.getElementById("finalMove").innerHTML = countMoves+' move';
@@ -215,9 +231,12 @@ function endOfGame(result) {
 
 }
 
+
+
 // close button in a popup
 function closeButton(){
     closeicon.addEventListener("click", function(e){
+    	document.removeEventListener("keypress", keyPressPlay);
         modal.classList.remove("show");
         startGame();
     });
@@ -226,6 +245,7 @@ function closeButton(){
 
 // 'play again' button in a popup
 function playAgain(){
+    document.removeEventListener("keypress",keyPressPlay);
     modal.classList.remove("show");
     startGame();
 }
