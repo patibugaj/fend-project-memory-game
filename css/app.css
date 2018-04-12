@@ -117,6 +117,7 @@ h1 {
 .score-panel {
     font-size: 14px;
     width: 352px;
+    max-width: 352px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -133,12 +134,30 @@ h1 {
 
 .score-panel .moves {
     flex-basis: 20%;
-    text-align: right;
+}
+
+.score-panel .moves .moves-elem {
+    display: inline-block;
+}
+
+.score-panel .moves #moves-number {
+    width: 10px;
 }
 
 .score-panel .timer {
     flex-basis: 38%;
-    text-align: right;
+}
+
+.score-panel .timer .timer-elem {
+    display: inline-block;
+}
+
+.score-panel .timer #timer-mins {
+    width: 10px;
+}
+
+.score-panel .timer #timer-secs {
+    width: 25px;
 }
 
 .score-panel .stars {
@@ -148,8 +167,8 @@ h1 {
     margin: 0 5px 0 0;
 }
 
-.score-panel .lives p {
-    display: inline-block;
+.score-panel p {
+    display: inline;
 }
 
 .score-panel .lives .stars li {

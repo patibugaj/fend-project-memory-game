@@ -30,11 +30,20 @@
             </div>
 
         	<div class="moves">
-                <p></p>
+                <p>
+                    <span class="moves-elem">Moves: </span>
+                    <span id="moves-number" class="moves-elem"></span>
+                </p>
             </div>
 
             <div id="timer" class="timer">
-                <p></p>
+                <p>
+                    <span id='timer-time' class='timer-elem'></span>
+                    <span id='timer-mins' class='timer-elem'></span>
+                    <span id='timer-mins-text' class='timer-elem'> mins </span>
+                    <span id='timer-secs' class='timer-elem'></span>
+                    <span id='timer-secs-text' class='timer-elem'> secs</span>
+                </p>
             </div>
             <!-- restart game button (keyboard shortcut: alt + r) -->
             <div class="restart" onclick=startGame() accesskey="r">
@@ -104,7 +113,7 @@
             </div>
             <div id="alert-paragraph-2" class="content-2">
                 <p>You made <span id="finalMove"></span></p>
-                <p class="win">in <span id="totalTime"></span> </p>
+                <p class="totalTime"><span id="totalTime"></span> </p>
                 <p>Lives left:  <span id="starRating"></span></p>
             </div>
             <button id="play-again" onclick="playAgain()">

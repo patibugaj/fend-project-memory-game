@@ -18,17 +18,29 @@ let openedCards = [];
 //variables for moves
 let countMoves = 0;
 let moves = document.querySelector(".moves");
+let movesNumber = document.querySelector("#moves-number");
 
 //variable of matched cards
 let matchedCard = document.getElementsByClassName("match");
 let matchedCards = 0;
 
- //variable for close icon in popup
- let closeicon = document.querySelector(".close");
+//variabled for timer
+let second, minute;
+let timer = document.querySelector("#timer");
+let timerTime = document.querySelector("#timer-time");
+let timerMins = document.querySelector("#timer-mins");
+let timerSecs = document.querySelector("#timer-secs");
+let interval;
 
- //variable for popup modal
- let modal = document.getElementById("alert-window")
+//variable for close icon in popup
+let closeicon = document.querySelector(".close");
 
+//variable for popup modal
+let modal = document.getElementById("alert-window");
+let heading = document.getElementById('alert').childNodes[3];
+let paragraph1 = document.querySelector('#alert-paragraph-1');
+
+ //variable for keypress function
  let keyPressPlay;
 
 /*
@@ -68,10 +80,10 @@ function startGame() {
 
     //reset moves
     countMoves = 0;
-    moves.innerHTML = 'Moves: 0';
+    movesNumber.innerHTML = countMoves;
 
     //reset star rating
-    for (var i= 0; i < stars.length; i++){
+    for (let i= 0; i < stars.length; i++){
         const star = stars[i].childNodes[0];
         star.className = 'fa fa-star';
     }
@@ -79,9 +91,15 @@ function startGame() {
     //reset timer
     second = 0;
     minute = 3;
-    let timer = document.querySelector(".timer");
-    timer.innerHTML = "Time: 3 mins 0 secs";
+    timerTime.innerHTML = "Time: ";
+    timerMins.innerHTML = minute;
+    timerSecs.innerHTML = '0'+second;
     clearInterval(interval);
+
+    //reset style for countdown
+	timer.style.animationName= "";
+	timer.style.animationDuration= "";
+	timer.style.color= "";
 
     //shuffle decked cards for new game
 	cards = shuffle(cards);
@@ -141,7 +159,7 @@ function openedCard() {
 
 function moveCounter() {
 	countMoves++;
-	moves.innerHTML = 'Moves: '+countMoves;
+	movesNumber.innerHTML = countMoves;
 	if(countMoves>=1 && second==0 && minute==3) {
 		//start game timer after first click on a card
 		startTimer();
@@ -171,27 +189,21 @@ function endOfGame(result) {
     const starRating = document.querySelector(".stars").innerHTML;
 
 	if(result=='timeLeft'){
-		const heading = document.getElementById('alert').childNodes[3];
 		heading.innerHTML = 'End of Game';
-		const paragraph1 = document.querySelector('#alert-paragraph-1');
 		paragraph1.innerHTML = 'You lose! Time is over';
 	    // reset star rating
 	    for (var i= 0; i < stars.length; i++){
 	        const star = stars[i].childNodes[0];
 	        star.className = 'fa fa-star-o';
 	    }
-	    document.querySelector(".win").style.display = "none";
+	    document.querySelector(".totalTime").style.display = "none";
 
 	} else if (result=='noLives'){
-		const heading = document.getElementById('alert').childNodes[3];
 		heading.innerHTML = 'End of Game';
-		const paragraph1 = document.querySelector('#alert-paragraph-1');
 		paragraph1.innerHTML = 'You lose! You lost all your lives';
 
     } else if (result=='win'){
-		const heading = document.getElementById('alert').childNodes[3];
 		heading.innerHTML = 'Congratulations!';
-		const paragraph1 = document.querySelector('#alert-paragraph-1');
 		const img = document.createElement('img');
 		img.src = 'https://media.giphy.com/media/DKnMqdm9i980E/giphy.gif';
 		paragraph1.innerHTML = 'You win!<br />';
@@ -230,8 +242,6 @@ function endOfGame(result) {
 
 }
 
-
-
 // close button in a popup
 function closeButton(){
     closeicon.addEventListener("click", function(e){
@@ -241,7 +251,6 @@ function closeButton(){
     });
 }
 
-
 // 'play again' button in a popup
 function playAgain(){
     document.removeEventListener("keypress",keyPressPlay);
@@ -250,12 +259,17 @@ function playAgain(){
 }
 
 // countdown timer
-var second = 0, minute = 3;
-var timer = document.querySelector("#timer");
-var interval;
 function startTimer(){
     interval = setInterval(function(){
-        timer.innerHTML = "Time: "+minute+"mins "+second+"secs";
+	    timerMins.innerHTML = minute;
+
+        //add leading zero
+        if(second<10){
+        	timerSecs.innerHTML = '0'+second;
+        } else {
+        	timerSecs.innerHTML = second;
+        }
+
         second--;
 
         //change minute
@@ -263,11 +277,6 @@ function startTimer(){
             minute--;
             second=59;
         }
-
-        //reset style for countdown
-    	timer.style.animationName= "";
-    	timer.style.animationDuration= "";
-    	timer.style.color= "";
 
         //add style for last 10sec countdown
         if(minute==0&&second<10){
@@ -292,8 +301,10 @@ function calculateTime() {
 	const finalTimeMinutes = Math.floor(finalTimeTotal/60);
 	const finalTimeSeconds = finalTimeTotal - finalTimeMinutes * 60;
     clearInterval(interval);
-    timer.innerHTML = 'time: '+finalTimeMinutes+'mins '+finalTimeSeconds+'secs';
-    const finalTime =timer.innerHTML;
+    timerMins.innerHTML = finalTimeMinutes;
+    timerSecs.innerHTML = finalTimeSeconds;
+    timerTime.innerHTML = "in ";
+    const finalTime = timer.innerHTML;
 
     return finalTime;
 }
