@@ -104,7 +104,7 @@ function startGame() {
     //shuffle decked cards for new game
 	cards = shuffle(cards);
 
-	for (var i = 0; i < cards.length; i++){
+	for (let i = 0; i < cards.length; i++){
         deck.innerHTML = "";
         [].forEach.call(cards, function(item) {
             deck.appendChild(item);
@@ -192,7 +192,7 @@ function endOfGame(result) {
 		heading.innerHTML = 'End of Game';
 		paragraph1.innerHTML = 'You lose! Time is over';
 	    // reset star rating
-	    for (var i= 0; i < stars.length; i++){
+	    for (let i= 0; i < stars.length; i++){
 	        const star = stars[i].childNodes[0];
 	        star.className = 'fa fa-star-o';
 	    }

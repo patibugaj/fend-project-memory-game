@@ -145,7 +145,7 @@ h1 {
 }
 
 .score-panel .timer {
-    flex-basis: 38%;
+    flex-basis: 40%;
 }
 
 .score-panel .timer .timer-elem {
@@ -177,7 +177,7 @@ h1 {
 }
 
 .score-panel .restart {
-    flex-basis: 14%;
+    flex-basis: 12%;
     float: right;
     cursor: pointer;
     font-size: 20px;
