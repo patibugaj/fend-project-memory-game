@@ -27,7 +27,6 @@ let matchedCards = 0;
 //variabled for timer
 let second, minute;
 let timer = document.querySelector("#timer");
-let timerTime = document.querySelector("#timer-time");
 let timerMins = document.querySelector("#timer-mins");
 let timerSecs = document.querySelector("#timer-secs");
 let interval;
@@ -91,7 +90,6 @@ function startGame() {
     //reset timer
     second = 0;
     minute = 3;
-    timerTime.innerHTML = "Time: ";
     timerMins.innerHTML = minute;
     timerSecs.innerHTML = '0'+second;
     clearInterval(interval);
@@ -261,6 +259,14 @@ function playAgain(){
 // countdown timer
 function startTimer(){
     interval = setInterval(function(){
+        second--;
+
+        //change minute
+        if(second == -1){
+            minute--;
+            second=59;
+        }
+
 	    timerMins.innerHTML = minute;
 
         //add leading zero
@@ -268,14 +274,6 @@ function startTimer(){
         	timerSecs.innerHTML = '0'+second;
         } else {
         	timerSecs.innerHTML = second;
-        }
-
-        second--;
-
-        //change minute
-        if(second == -1){
-            minute--;
-            second=59;
         }
 
         //add style for last 10sec countdown
@@ -301,10 +299,7 @@ function calculateTime() {
 	const finalTimeMinutes = Math.floor(finalTimeTotal/60);
 	const finalTimeSeconds = finalTimeTotal - finalTimeMinutes * 60;
     clearInterval(interval);
-    timerMins.innerHTML = finalTimeMinutes;
-    timerSecs.innerHTML = finalTimeSeconds;
-    timerTime.innerHTML = "in ";
-    const finalTime = timer.innerHTML;
+    const finalTime = "in "+finalTimeMinutes+" mins "+finalTimeSeconds+" secs";
 
     return finalTime;
 }
